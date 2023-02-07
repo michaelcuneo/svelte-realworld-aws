@@ -1,50 +1,52 @@
 <script lang="ts">
 	import type { ActionData } from './$types';
-	import { afterUpdate, onMount } from 'svelte';
-	import { goto } from '$app/navigation';
+	import { enhance } from '$app/forms';
 	import Button from '$lib/Button.svelte';
 	import TabBar from '$lib/TabBar.svelte';
 	import Card from '$lib/Card.svelte';
 	import Textfield from '$lib/Textfield.svelte';
 	import { transitionUser, mfa, signupConfirm } from '$lib/store';
-
 	import { Auth } from '@aws-amplify/auth';
 	import awsmobile from '../../aws-exports';
-	import { redirect } from '@sveltejs/kit';
 
 	mfa.useLocalStorage();
 
 	Auth.configure(awsmobile);
 
-	let username: string = 'michaelcuneo';
-	let password: string = 'M0bean0e75!';
-	let email: string = 'me@michaelcuneo.com.au';
-	let phone: string = '+61488467755';
-	let confirm: string = '';
+	let error: any;
 
 	let tabItems = ['Sign in', 'Sign up'];
 	let activeItem = 'Sign in';
 
-	const signIn = async () => {
-		await Auth.signIn(username, password)
+	const signIn = async ({ form, data, action, cancel }) => {
+		await Auth.signIn(data.get('username'), data.get('password'))
 			.then((result) => {
 				if (result.challengeName === 'SMS_MFA') {
 					transitionUser.set(result);
 					mfa.set(true);
 				}
-				console.log(result);
-				throw redirect(303, '?/login');
 			})
 			.catch((err) => err);
+		return async ({ result, update }) => {
+			await update();
+		};
 	};
 
-	const signUp = async () => {
-		await Auth.signUp(username, password, email, phone)
+	const signUp = async ({ form, data, action, cancel }) => {
+		await Auth.signUp(
+			data.get('username'),
+			data.get('password'),
+			data.get('email'),
+			data.get('phone')
+		)
 			.then((result) => {
 				transitionUser.set(result);
 				signupConfirm.set(true);
 			})
 			.catch((err) => err);
+		return async ({ result, update }) => {
+			await update();
+		};
 	};
 
 	const confirmSignUp = async () => {
@@ -70,13 +72,13 @@
 		<TabBar {tabItems} {activeItem} on:tabChange={triggerTabChange} />
 		{#if activeItem == 'Sign in'}
 			{#if $mfa == false}
-				<form on:submit|preventDefault={signIn}>
+				<form action="?/login" method="POST" use:enhance={signIn}>
 					<Card>
 						<p>
-							<input type="text" name="username" required />
+							<Textfield type="text" name="username" required />
 						</p>
 						<p>
-							<input type="password" name="password" required />
+							<Textfield type="password" name="password" required />
 						</p>
 						{#if form?.errorMessage}
 							<p>
@@ -110,16 +112,16 @@
 			<form on:submit|preventDefault={signUp}>
 				<Card>
 					<p>
-						<input type="text" name="username" bind:value={username} />
+						<input type="text" name="username" />
 					</p>
 					<p>
-						<input type="password" name="password" bind:value={password} />
+						<input type="password" name="password" />
 					</p>
 					<p>
-						<input type="text" name="phone" bind:value={phone} />
+						<input type="text" name="phone" />
 					</p>
 					<p>
-						<input type="text" name="email" bind:value={email} />
+						<input type="text" name="email" />
 					</p>
 					{#if form?.errorMessage}
 						<p>
@@ -139,7 +141,7 @@
 						with.
 					</p>
 					<p>
-						<input type="numbers" name="confirmation" bind:value={confirm} />
+						<input type="numbers" name="confirmation" />
 					</p>
 					{#if form?.errorMessage}
 						<p>

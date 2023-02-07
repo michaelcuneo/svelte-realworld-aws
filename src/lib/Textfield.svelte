@@ -1,13 +1,12 @@
 <script lang="ts">
 	export let type: string;
 	export let name: string;
-	export let label: string;
-	export let value: string;
+	export let required: boolean;
 </script>
 
 <div class="custom-field">
-	<label for={label}>{label}</label>
-	<input {type} name={label} value placeholder="&nbsp;" />
+	<label for={name}>{name}</label>
+	<input {type} {name} value {required} placeholder="&nbsp;" />
 </div>
 
 <style>

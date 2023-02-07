@@ -1,5 +1,6 @@
 import { browser } from '$app/environment';
 import { writable } from 'svelte/store';
+import { nanoid } from "nanoid";
 
 type SessionInfo = {
   username: string;
@@ -23,7 +24,7 @@ const clean = () => {
 }
 
 const getSid = (): Sid => {
-  return randomBytes(32).toString('hex');
+  return nanoid(48);
 }
 
 export const createSession = (username: string, maxAge: number) => {

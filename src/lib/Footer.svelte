@@ -11,9 +11,20 @@
 				alt="Powered by AWS Cloud Computing"
 			/></a
 		>
-		<pre>  |  Designed by Michael Cuneo  |  </pre>
+		<pre>  |  SvelteKit 1.0 AWS Boilerplate  |  v1.0.0  |  Michael Cuneo  |  </pre>
 		<a href="https://svelte.dev/" class="sveltelink">
 			<img src="svelte-icon.svg" alt="Svelte Icon" />
+		</a>
+		<pre>  |  </pre>
+		<a href="https://github.com/michaelcuneo/sveltekit-realworld-aws" class="sveltelink">
+			<img src="github-mark-white.svg" alt="Svelte Icon" />
+		</a>
+		<pre>  |  </pre>
+		<a
+			href="https://join.slack.com/t/michaelcuneo/shared_invite/zt-1olb564gn-qJ6779idHvXPVHyQISwPcA"
+			class="sveltelink"
+		>
+			<img src="slack.webp" alt="Svelte Icon" />
 		</a>
 		<!-- Rounded switch -->
 		<label class="switch">
@@ -69,9 +80,9 @@
 		position: absolute;
 		display: flex;
 		align-items: center;
-		right: 1.5rem;
-		width: 60px;
-		height: 34px;
+		right: 1.6rem;
+		width: 48px;
+		height: 24px;
 	}
 
 	/* Hide default HTML checkbox */
@@ -97,9 +108,9 @@
 	.slider:before {
 		position: absolute;
 		content: '';
-		height: 26px;
-		width: 26px;
-		left: 4px;
+		height: 16px;
+		width: 16px;
+		left: 2px;
 		bottom: 4px;
 		background-color: white;
 		-webkit-transition: 0.4s;
@@ -122,7 +133,7 @@
 
 	/* Rounded sliders */
 	.slider.round {
-		border-radius: 34px;
+		border-radius: 24px;
 	}
 
 	.slider.round:before {
