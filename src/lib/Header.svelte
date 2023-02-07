@@ -1,6 +1,5 @@
 <script lang="ts">
 	export let username: string;
-	console.log(username);
 </script>
 
 <header>

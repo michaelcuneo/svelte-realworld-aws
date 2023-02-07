@@ -15,8 +15,8 @@
 
 	let error: any;
 
-	let tabItems = ['Sign in', 'Sign up'];
-	let activeItem = 'Sign in';
+	let tabItems: string[] = ['Sign in', 'Sign up'];
+	let activeItem: string = 'Sign in';
 
 	const signIn = async ({ form, data, action, cancel }) => {
 		await Auth.signIn(data.get('username'), data.get('password'))
@@ -49,10 +49,8 @@
 		};
 	};
 
-	const confirmSignUp = async () => {
-		signupConfirm.set(false);
-
-		await Auth.confirmSignUp(username, confirm)
+	const confirmSignUp = async ({ form, data, action, cancel }) => {
+		await Auth.confirmSignUp(data.get('username'), data.get('confirm'))
 			.then((result) => {
 				signupConfirm.set(false);
 				activeItem = 'Sign in';
