@@ -1,46 +1,33 @@
 <script lang="ts">
-	export let type: string;
+	import FloatingLabel from '@smui/floating-label';
+	import NotchedOutline from '@smui/notched-outline';
+	import Textfield, { Input } from '@smui/textfield';
+
+	export let input: Input;
+	export let outline: NotchedOutline;
+	export let label: FloatingLabel;
 	export let name: string;
-	export let required: boolean;
 </script>
 
-<div class="custom-field">
-	<label for={name}>{name}</label>
-	<input {type} {name} value {required} placeholder="&nbsp;" />
-</div>
+<Textfield
+	bind:input
+	bind:notchedOutline={outline}
+	bind:floatingLabel={label}
+	input$autocomplete="username"
+	variant="outlined"
+	style="width: 100%;"
+>
+	<NotchedOutline bind:this={outline} slot="label">
+		<FloatingLabel bind:this={label} for="usernameLabel">{name}</FloatingLabel>
+	</NotchedOutline>
+	<Input
+		id="usernameLabel"
+		bind:this={input}
+		{name}
+		aria-controls="helper-text-manual-b"
+		aria-describedby="helper-text-manual-b"
+	/>
+</Textfield>
 
 <style>
-	.custom-field {
-		position: relative;
-		font-size: 14px;
-		border-top: 20px solid transparent;
-		display: inline-block;
-		--field-padding: 12px;
-	}
-
-	.custom-field input {
-		border: none;
-		-webkit-appearance: none;
-		-ms-appearance: none;
-		-moz-appearance: none;
-		appearance: none;
-		background: #36454f;
-		padding: var(--field-padding);
-		border-radius: 3px;
-		width: 100%;
-		outline: none;
-		font-size: 14px;
-	}
-
-	/* ONE */
-	.custom-field input {
-		background: none;
-		border: 2px solid #263138;
-		transition: border-color 0.3s ease;
-	}
-
-	.custom-field input:focus {
-		border-color: #36454f;
-		transition-delay: 0.1s;
-	}
 </style>

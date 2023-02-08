@@ -1,20 +1,20 @@
 {
-  "dev": {
-    "awscloudformation": {
-      "AuthRoleName": "amplify-sveltekitrealworld-dev-131028-authRole",
-      "UnauthRoleArn": "arn:aws:iam::481588845003:role/amplify-sveltekitrealworld-dev-131028-unauthRole",
-      "AuthRoleArn": "arn:aws:iam::481588845003:role/amplify-sveltekitrealworld-dev-131028-authRole",
-      "Region": "ap-southeast-2",
-      "DeploymentBucketName": "amplify-sveltekitrealworld-dev-131028-deployment",
-      "UnauthRoleName": "amplify-sveltekitrealworld-dev-131028-unauthRole",
-      "StackName": "amplify-sveltekitrealworld-dev-131028",
-      "StackId": "arn:aws:cloudformation:ap-southeast-2:481588845003:stack/amplify-sveltekitrealworld-dev-131028/98495b50-a68c-11ed-bccd-0a87c0da3408",
-      "AmplifyAppId": "d22xrskmh847uy"
-    },
-    "categories": {
-      "auth": {
-        "sveltekitrealworld3488d2dd": {}
-      }
-    }
-  }
+	"dev": {
+		"awscloudformation": {
+			"AuthRoleName": "amplify-sveltekitrealworld-dev-131028-authRole",
+			"UnauthRoleArn": "arn:aws:iam::481588845003:role/amplify-sveltekitrealworld-dev-131028-unauthRole",
+			"AuthRoleArn": "arn:aws:iam::481588845003:role/amplify-sveltekitrealworld-dev-131028-authRole",
+			"Region": "ap-southeast-2",
+			"DeploymentBucketName": "amplify-sveltekitrealworld-dev-131028-deployment",
+			"UnauthRoleName": "amplify-sveltekitrealworld-dev-131028-unauthRole",
+			"StackName": "amplify-sveltekitrealworld-dev-131028",
+			"StackId": "arn:aws:cloudformation:ap-southeast-2:481588845003:stack/amplify-sveltekitrealworld-dev-131028/98495b50-a68c-11ed-bccd-0a87c0da3408",
+			"AmplifyAppId": "d22xrskmh847uy"
+		},
+		"categories": {
+			"auth": {
+				"sveltekitrealworld3488d2dd": {}
+			}
+		}
+	}
 }

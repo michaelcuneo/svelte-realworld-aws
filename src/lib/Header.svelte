@@ -1,23 +1,35 @@
 <script lang="ts">
+	import User from './User.svelte';
+
 	export let username: string;
 </script>
 
 <header>
-	<a href="/">
-		<logotype>
-			<sveltekit>SvelteKit 1.0</sveltekit>
-			<pre> | </pre>
-			<small>REALWORLD + AWS</small>
-		</logotype>
-	</a>
-	<username>
-		{#if username}
-			Hello {username},
-			<a href="/logout" data-sveltekit-preload-data="off" data-sveltekit-reload>LOGOUT</a>
-		{:else}
-			<a href="/auth">Login</a>
-		{/if}
-	</username>
+	<div class="left">
+		<a href="/">
+			<div class="logotype">
+				<div class="sveltekit">SvelteKit 1.0</div>
+				<pre> | </pre>
+				<div class="smaller">AWS BOILERPLATE</div>
+			</div>
+		</a>
+	</div>
+	<div class="right">
+		<User {username} />
+		<div class="icon">
+			<a href="https://github.com/michaelcuneo/sveltekit-realworld-aws" class="sveltelink">
+				<img src="github-mark-white.svg" alt="Svelte Icon" />
+			</a>
+		</div>
+		<div class="icon">
+			<a
+				href="https://join.slack.com/t/michaelcuneo/shared_invite/zt-1olb564gn-qJ6779idHvXPVHyQISwPcA"
+				class="sveltelink"
+			>
+				<img src="slack.webp" alt="Svelte Icon" />
+			</a>
+		</div>
+	</div>
 </header>
 
 <style>
@@ -33,7 +45,15 @@
 		border-bottom: 1px solid rgba(255, 255, 255, 0.2);
 		z-index: 2;
 	}
-	logotype {
+	.left {
+		display: flex;
+		align-items: center;
+	}
+	.right {
+		display: flex;
+		align-items: center;
+	}
+	.logotype {
 		display: flex;
 		flex-direction: row;
 		align-items: center;
@@ -42,22 +62,26 @@
 		padding: 0;
 		margin: 0;
 	}
-	sveltekit {
+	.sveltekit {
 		padding: 0rem 0rem 0rem 1.5rem;
 		font-size: 1.2rem;
 		font-family: 'Inconsolata', monospace;
 		font-weight: 700;
 	}
-	small {
+	img {
+		height: 1.8rem;
+		width: auto;
+	}
+	.smaller {
 		font-size: 0.8rem;
 		font-family: 'Montserrat', sans-serif;
 		font-weight: 400;
 	}
-	username {
-		padding: 0rem 1.5rem 0rem 0rem;
-	}
 	a {
 		color: white;
 		text-decoration: none;
+	}
+	.icon {
+		padding: 0rem 1.5rem 0rem 0rem;
 	}
 </style>

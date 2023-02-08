@@ -1,17 +1,15 @@
 {
-  "projectName": "sveltekitrealworld",
-  "version": "3.1",
-  "frontend": "javascript",
-  "javascript": {
-    "framework": "none",
-    "config": {
-      "SourceDir": "src",
-      "DistributionDir": "dist",
-      "BuildCommand": "npm run build",
-      "StartCommand": "npm run dev -- --host --port 3000"
-    }
-  },
-  "providers": [
-    "awscloudformation"
-  ]
+	"projectName": "sveltekitrealworld",
+	"version": "3.1",
+	"frontend": "javascript",
+	"javascript": {
+		"framework": "none",
+		"config": {
+			"SourceDir": "src",
+			"DistributionDir": "dist",
+			"BuildCommand": "npm run build",
+			"StartCommand": "npm run dev -- --host --port 3000"
+		}
+	},
+	"providers": ["awscloudformation"]
 }

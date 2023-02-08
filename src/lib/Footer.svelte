@@ -3,55 +3,42 @@
 </script>
 
 <footer>
-	<div class="content">
-		<a href="https://aws.amazon.com/what-is-cloud-computing"
-			><img
-				class="power"
-				src="https://d0.awsstatic.com/logos/powered-by-aws-white.png"
-				alt="Powered by AWS Cloud Computing"
-			/></a
-		>
-		<pre>  |  SvelteKit 1.0 AWS Boilerplate  |  v1.0.0  |  Michael Cuneo  |  </pre>
-		<a href="https://svelte.dev/" class="sveltelink">
-			<img src="svelte-icon.svg" alt="Svelte Icon" />
-		</a>
-		<pre>  |  </pre>
-		<a href="https://github.com/michaelcuneo/sveltekit-realworld-aws" class="sveltelink">
-			<img src="github-mark-white.svg" alt="Svelte Icon" />
-		</a>
-		<pre>  |  </pre>
-		<a
-			href="https://join.slack.com/t/michaelcuneo/shared_invite/zt-1olb564gn-qJ6779idHvXPVHyQISwPcA"
-			class="sveltelink"
-		>
-			<img src="slack.webp" alt="Svelte Icon" />
-		</a>
-		<!-- Rounded switch -->
-		<label class="switch">
-			<mode>{mode}</mode>
-			<input type="checkbox" />
-			<span class="slider round" />
-		</label>
-	</div>
+	<pre>SvelteKit 1.0 AWS Boilerplate  |  v1.0.0  |  Michael Cuneo  |  </pre>
+	<a href="https://aws.amazon.com/what-is-cloud-computing"
+		><img
+			class="power"
+			src="https://d0.awsstatic.com/logos/powered-by-aws-white.png"
+			alt="Powered by AWS Cloud Computing"
+		/></a
+	>
+	<pre>  &  </pre>
+	<a href="https://svelte.dev/" class="sveltelink">
+		<img src="svelte-icon.svg" alt="Svelte Icon" />
+	</a>
+	<pre>velte.</pre>
+	<!-- Rounded switch -->
+	<label class="switch">
+		<mode>{mode}</mode>
+		<input type="checkbox" />
+		<span class="slider round" />
+	</label>
 </footer>
 
 <style>
 	footer {
 		position: absolute;
+		display: flex;
+		flex-direction: row;
+		align-items: center;
+		justify-content: center;
 		width: 100%;
 		bottom: 0;
 		height: 60px;
 		font-size: 16px;
 		font-family: 'Montserrat', sans-serif;
 		font-weight: 400;
+		background: #262626;
 		color: white;
-	}
-	.content {
-		display: flex;
-		position: relative;
-		flex-direction: row;
-		align-items: center;
-		justify-content: center;
 	}
 	pre {
 		font-size: 0.9rem;

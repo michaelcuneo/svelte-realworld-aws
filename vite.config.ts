@@ -10,12 +10,11 @@ export default defineConfig({
 	optimizeDeps: {
 		esbuildOptions: {
 			define: {
-				global: "globalThis", // <-- AWS SDK
-			},
-		},
+				global: 'globalThis' // <-- AWS SDK
+			}
+		}
 	},
 	test: {
 		include: ['src/**/*.{test,spec}.{js,ts}']
 	},
-	logLevel: 'warn',
 });

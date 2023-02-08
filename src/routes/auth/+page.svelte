@@ -1,22 +1,35 @@
 <script lang="ts">
 	import type { ActionData } from './$types';
-	import { enhance } from '$app/forms';
-	import Button from '$lib/Button.svelte';
-	import TabBar from '$lib/TabBar.svelte';
-	import Card from '$lib/Card.svelte';
+	import { applyAction, enhance } from '$app/forms';
+	import Button from '@smui/button';
+	import Tab, { Label } from '@smui/tab';
+	import TabBar from '@smui/tab-bar';
+	import Card from '@smui/card';
+	import type { Input } from '@smui/textfield';
 	import Textfield from '$lib/Textfield.svelte';
+	import FloatingLabel from '@smui/floating-label';
+	import NotchedOutline from '@smui/notched-outline';
 	import { transitionUser, mfa, signupConfirm } from '$lib/store';
 	import { Auth } from '@aws-amplify/auth';
 	import awsmobile from '../../aws-exports';
+	import { goto, invalidateAll } from '$app/navigation';
 
 	mfa.useLocalStorage();
 
 	Auth.configure(awsmobile);
 
-	let error: any;
+	let active = 'Sign in';
 
-	let tabItems: string[] = ['Sign in', 'Sign up'];
-	let activeItem: string = 'Sign in';
+	let usernameInput: Input;
+	let usernameLabel: FloatingLabel;
+	let usernameOutline: NotchedOutline;
+	let passwordInput: Input;
+	let passwordLabel: FloatingLabel;
+	let passwordOutline: NotchedOutline;
+
+	const handleError = (error: object) => {
+		console.log(error);
+	};
 
 	const signIn = async ({ form, data, action, cancel }) => {
 		await Auth.signIn(data.get('username'), data.get('password'))
@@ -26,9 +39,19 @@
 					mfa.set(true);
 				}
 			})
-			.catch((err) => err);
+			.catch((err) => {
+				handleError(err);
+				cancel();
+			});
 		return async ({ result, update }) => {
-			await update();
+			switch (result.type) {
+				case 'success':
+					form.reset();
+					await applyAction(result);
+					await invalidateAll();
+					goto('/');
+					break;
+			}
 		};
 	};
 
@@ -45,7 +68,13 @@
 			})
 			.catch((err) => err);
 		return async ({ result, update }) => {
-			await update();
+			switch (result.type) {
+				case 'success':
+					form.reset();
+					await applyAction(result);
+					await invalidateAll();
+					break;
+			}
 		};
 	};
 
@@ -53,13 +82,9 @@
 		await Auth.confirmSignUp(data.get('username'), data.get('confirm'))
 			.then((result) => {
 				signupConfirm.set(false);
-				activeItem = 'Sign in';
+				active = 'Sign in';
 			})
 			.catch((err) => err);
-	};
-
-	const triggerTabChange = (event: any) => {
-		activeItem = event.detail;
 	};
 
 	export let form: ActionData;
@@ -67,17 +92,34 @@
 
 <div>
 	<form-wrapper>
-		<TabBar {tabItems} {activeItem} on:tabChange={triggerTabChange} />
-		{#if activeItem == 'Sign in'}
+		<TabBar tabs={['Sign in', 'Sign up']} let:tab bind:active>
+			<!-- Note: the `tab` property is required! -->
+			<Tab {tab}>
+				<Label>{tab}</Label>
+			</Tab>
+		</TabBar>
+		{#if active == 'Sign in'}
 			{#if $mfa == false}
 				<form action="?/login" method="POST" use:enhance={signIn}>
 					<Card>
+						<p>Sign in using your username and password.</p>
 						<p>
-							<Textfield type="text" name="username" required />
+							<Textfield
+								name="username"
+								input={usernameInput}
+								outline={usernameOutline}
+								label={usernameLabel}
+							/>
 						</p>
 						<p>
-							<Textfield type="password" name="password" required />
+							<Textfield
+								name="password"
+								input={passwordInput}
+								outline={passwordOutline}
+								label={passwordLabel}
+							/>
 						</p>
+						<p />
 						{#if form?.errorMessage}
 							<p>
 								{form.errorMessage}
