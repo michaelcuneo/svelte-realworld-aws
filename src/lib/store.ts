@@ -91,7 +91,9 @@ const createWritableStore = (key: string, startValue: object | string | boolean)
 	};
 };
 
-export const theme = createWritableStore('theme', { mode: 'dark', color: 'blue' });
+export const theme = createWritableStore('theme', 'dark');
 export const transitionUser = createWritableStore('transitionUser', {});
 export const mfa = createWritableStore('mfa', false);
 export const signupConfirm = createWritableStore('signupConfirm', false);
+export const toggle = createWritableStore('toggle', false);
+export const errs = createWritableStore('errs', {});

@@ -1,5 +1,5 @@
 <script lang="ts">
-	import User from './User.svelte';
+	import User from '../lib/User.svelte';
 
 	export let username: string;
 </script>
@@ -8,13 +8,21 @@
 	<div class="left">
 		<a href="/">
 			<div class="logotype">
-				<div class="sveltekit">SvelteKit 1.0</div>
-				<pre> | </pre>
-				<div class="smaller">AWS BOILERPLATE</div>
+				<img src="logo.svg" alt="logo.svg" />
+				<div class="sveltekit">SKamplify</div>
 			</div>
 		</a>
 	</div>
 	<div class="right">
+		<div class="icon">
+			<a href="/about" class="sveltelink">ABOUT</a>
+		</div>
+		<div class="icon">
+			<a href="/features" class="sveltelink">FEATURES</a>
+		</div>
+		<div class="icon">
+			<a href="/documentation" class="sveltelink">DOCUMENTATION</a>
+		</div>
 		<User {username} />
 		<div class="icon">
 			<a href="https://github.com/michaelcuneo/sveltekit-realworld-aws" class="sveltelink">
@@ -42,8 +50,12 @@
 		left: 0;
 		right: 0;
 		height: 80px;
+		background: var(--color-paper);
 		border-bottom: 1px solid rgba(255, 255, 255, 0.2);
 		z-index: 2;
+	}
+	img {
+		padding: 0rem 0rem 0rem 1rem;
 	}
 	.left {
 		display: flex;
@@ -58,9 +70,12 @@
 		flex-direction: row;
 		align-items: center;
 	}
-	pre {
-		padding: 0;
-		margin: 0;
+	a {
+		color: white;
+		text-decoration: none;
+		font-family: 'Inconsolata', monospace;
+		font-weight: 700;
+		font-size: 1.2rem;
 	}
 	.sveltekit {
 		padding: 0rem 0rem 0rem 1.5rem;
@@ -71,11 +86,6 @@
 	img {
 		height: 1.8rem;
 		width: auto;
-	}
-	.smaller {
-		font-size: 0.8rem;
-		font-family: 'Montserrat', sans-serif;
-		font-weight: 400;
 	}
 	a {
 		color: white;
